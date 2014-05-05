@@ -1,0 +1,8 @@
+*.dll
+*.exe
+*.userprefs
+*.pidb
+*.mdb
+bin/
+test-results/
+.DS_Store
