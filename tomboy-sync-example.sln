@@ -3,22 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tomboy-sync-example", "tomboy-sync-example.csproj", "{2D66BB7A-EE89-4696-BD22-AB2DD42BDE26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomboy-library", "..\tomboy-library\Tomboy-library\Tomboy-library.csproj", "{040AA912-9738-438A-A7FD-5BB02C40C30A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomboy-library", "tomboy-library\Tomboy-library\Tomboy-library.csproj", "{040AA912-9738-438A-A7FD-5BB02C40C30A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
+		UnitTesting|Any CPU = UnitTesting|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{040AA912-9738-438A-A7FD-5BB02C40C30A}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{040AA912-9738-438A-A7FD-5BB02C40C30A}.Debug|x86.Build.0 = Debug|Any CPU
-		{040AA912-9738-438A-A7FD-5BB02C40C30A}.Release|x86.ActiveCfg = Release|x86
-		{040AA912-9738-438A-A7FD-5BB02C40C30A}.Release|x86.Build.0 = Release|x86
+		{040AA912-9738-438A-A7FD-5BB02C40C30A}.Release|x86.ActiveCfg = Release|Any CPU
+		{040AA912-9738-438A-A7FD-5BB02C40C30A}.Release|x86.Build.0 = Release|Any CPU
+		{040AA912-9738-438A-A7FD-5BB02C40C30A}.UnitTesting|Any CPU.ActiveCfg = UnitTesting|Any CPU
+		{040AA912-9738-438A-A7FD-5BB02C40C30A}.UnitTesting|Any CPU.Build.0 = UnitTesting|Any CPU
 		{2D66BB7A-EE89-4696-BD22-AB2DD42BDE26}.Debug|x86.ActiveCfg = Debug|x86
 		{2D66BB7A-EE89-4696-BD22-AB2DD42BDE26}.Debug|x86.Build.0 = Debug|x86
 		{2D66BB7A-EE89-4696-BD22-AB2DD42BDE26}.Release|x86.ActiveCfg = Release|x86
 		{2D66BB7A-EE89-4696-BD22-AB2DD42BDE26}.Release|x86.Build.0 = Release|x86
+		{2D66BB7A-EE89-4696-BD22-AB2DD42BDE26}.UnitTesting|Any CPU.ActiveCfg = Debug|x86
+		{2D66BB7A-EE89-4696-BD22-AB2DD42BDE26}.UnitTesting|Any CPU.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = tomboy-sync-example.csproj
