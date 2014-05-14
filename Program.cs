@@ -1,16 +1,14 @@
 ﻿using System;
-using Tomboy;
-using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using Tomboy.Sync.Filesystem;
-using Tomboy.Sync;
-using Tomboy.Sync.Web;
-using System.Net;
-using System.Threading;
 using System.Diagnostics;
-using Tomboy.OAuth;
+using System.IO;
 using System.Linq;
+using System.Net;
+using Tomboy;
+using Tomboy.OAuth;
+using Tomboy.Sync;
+using Tomboy.Sync.Filesystem;
+using Tomboy.Sync.Web;
 
 namespace tomboysyncexample
 {
@@ -72,6 +70,9 @@ namespace tomboysyncexample
 				} else {
 					// authentication successfull
 					context.Response.StatusCode = 200;
+					using (var writer = new StreamWriter (context.Response.OutputStream)) {
+						writer.WriteLine("<h1>Authorization successfull!</h1>Go back to the Tomboy application window.");
+					}
 					context.Response.Close();
 					return oauth_verifier;
 				}
@@ -82,7 +83,7 @@ namespace tomboysyncexample
 			ServicePointManager.CertificatePolicy = new DummyCertificateManager ();
 
 			// Rainy public demo server, see http://dynalon.github.io/Rainy/#!PUBLIC_SERVER.md for list of demo accounts
-			string serverUrl = "https://rpi.orion.latecrew.de/";
+			string serverUrl = "https://rainy-demoserver.latecrew.de/";
 
 			// connect to the server and obtain the token - this only has to be done ONCE
 			IOAuthToken access_token = WebSyncServer.PerformTokenExchange (serverUrl, callbackUrl, callback_delegate);
@@ -94,17 +95,24 @@ namespace tomboysyncexample
 			// Creating a token instance as an example here
 			OAuthToken reused_access_token = new OAuthToken { Token = access_token.Token, Secret = access_token.Secret };
 
+			// ---- CLEAN OUT ANY PREVIOUS NOTES ----
+			// for this example we want to delete all notes present for the user already to be removed to get a clean
+			// environment. The DeveloperServiceClient should not be used in production code!
+			var developerService = new Tomboy.Sync.Web.Developer.DeveloperServiceClient (serverUrl, reused_access_token);
+			developerService.ClearAllNotes ("testuser");
+
 			// ---- PERFORM A SYNC WITH A REMOTE SERVER ---- 
 			ISyncClient client = new FilesystemSyncClient (localEngine, localManifest);
 			ISyncServer server = new WebSyncServer (serverUrl, reused_access_token);
 
 			new SyncManager (client, server).DoSync ();
-			// SUCCESS: we have synced the notes with the server!
+			Console.WriteLine ("SUCCESS: we have successfully synced the notes with the server!");
 
 			// TODO: we still miss GUI hooks in tomboy-library to prompt for conflicts, show progress etc. :(
 	
 			// ---- CLEAN UP ----
 			listener.Stop ();
+			Console.WriteLine ("EXITING");
 		}
 
 		public static List<Note> GetSomeSampleNotes ()
